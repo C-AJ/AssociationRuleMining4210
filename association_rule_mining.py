@@ -41,11 +41,12 @@ encoded_vals = []
 
 for index, row in df.iterrows():
 
-    labels = {
-        'Bread' : 0,
-        'Milk' : 1,
-    }
-
+    labels = {}
+    for i in itemset:
+        labels[i] = 0
+    for j in row:
+        if j in itemset:
+            labels[j] = 1
     encoded_vals.append(labels)
 
 #adding the populated list with multiple dictionaries to a data frame
@@ -63,12 +64,34 @@ rules = association_rules(freq_items, metric="confidence", min_threshold=0.6)
 #Prior: 0.4380952380952381
 #Gain in Confidence: 52.17391304347825
 #-->add your python code below
+for i in range(len(rules)):
+    #print(list(rules.loc[i][0]))
+    #print(list(rules.loc[i][1]))
+    #print(rules.loc[i][2])
+    #print(rules.loc[i][3])
+    #print(rules.loc[i][4])
+    #print(rules)
+
+    antecedents = list(rules.loc[i, 'antecedents'])
+    consequents = list(rules.loc[i, 'consequents'])
+    support = rules.loc[i, 'support']
+    confidence = rules.loc[i, 'confidence']
 
 #To calculate the prior and gain in confidence, find in how many transactions the consequent of the rule appears (the supporCount below). Then,
 #use the gain formula provided right after.
 #prior = suportCount/len(encoded_vals) -> encoded_vals is the number of transactions
 #print("Gain in Confidence: " + str(100*(rule_confidence-prior)/prior))
 #-->add your python code below
+    
+    prior = rules.loc[i, 'consequent support']
+    gain_in_conf = str(100 * ((confidence - prior) / prior))
+
+    print(str(antecedents) + " --> " + str(consequents))
+    print("Support: " + str(support))
+    print("Confidence: " + str(confidence))
+    print("Prior: " + str(prior))
+    print("Gain in Confidence: " + str(gain_in_conf))
+    print()
 
 #Finally, plot support x confidence
 plt.scatter(rules['support'], rules['confidence'], alpha=0.5)

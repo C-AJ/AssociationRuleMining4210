@@ -1,9 +1,9 @@
 #-------------------------------------------------------------------------
-# AUTHOR: your name
-# FILENAME: title of the source file
-# SPECIFICATION: description of the program
+# AUTHOR: Austin Celestino
+# FILENAME: association_rule_mining.py
+# SPECIFICATION: Does association rule mining on a set of groceries
 # FOR: CS 4210- Assignment #5
-# TIME SPENT: how long it took you to complete the assignment
+# TIME SPENT: 5 hours
 #-----------------------------------------------------------*/
 
 import pandas as pd
@@ -82,7 +82,7 @@ for i in range(len(rules)):
 #prior = suportCount/len(encoded_vals) -> encoded_vals is the number of transactions
 #print("Gain in Confidence: " + str(100*(rule_confidence-prior)/prior))
 #-->add your python code below
-    
+
     prior = rules.loc[i, 'consequent support']
     gain_in_conf = str(100 * ((confidence - prior) / prior))
 

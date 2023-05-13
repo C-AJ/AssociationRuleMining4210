@@ -37,11 +37,14 @@ itemset.remove(np.nan)
 #To do that, create a dictionary (labels) for each transaction, store the corresponding values for each item (e.g., {'Bread': 0, 'Milk': 1}) in that transaction,
 #and when is completed, append the dictionary to the list encoded_vals below (this is done for each transaction)
 #-->add your python code below
-
 encoded_vals = []
+
 for index, row in df.iterrows():
 
-    labels = {}
+    labels = {
+        'Bread' : 0,
+        'Milk' : 1,
+    }
 
     encoded_vals.append(labels)
 
